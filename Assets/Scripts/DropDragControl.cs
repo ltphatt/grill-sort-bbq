@@ -73,6 +73,10 @@ public class DropDragControl : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                ClearCacheFood();
+            }
         }
 
         // Handle when player release the food item
@@ -87,7 +91,10 @@ public class DropDragControl : MonoBehaviour
                     cacheFood.OnActiveFood(true);
 
                     cacheFood.OnCheckMerge();
+                    currentFood?.OnCheckPrepareTray();
+
                     cacheFood = null;
+                    currentFood = null;
                 });
             }
             else

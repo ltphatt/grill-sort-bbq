@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,5 +58,23 @@ public class FoodSlot : MonoBehaviour
     public void OnCheckMerge()
     {
         grillController?.OnCheckMerge();
+    }
+
+    public void OnPrepareItem(Image food)
+    {
+        SetFoodSlot(food.sprite);
+        foodImage.color = normalColor;
+        foodImage.transform.position = food.transform.position;
+        foodImage.transform.localScale = food.transform.localScale;
+        foodImage.transform.localEulerAngles = food.transform.localEulerAngles;
+
+        foodImage.transform.DOLocalMove(Vector3.zero, 0.2f);
+        foodImage.transform.DOScale(Vector3.one, 0.2f);
+        foodImage.transform.DOLocalRotate(Vector3.zero, 0.2f);
+    }
+
+    public void OnCheckPrepareTray()
+    {
+        grillController?.OnCheckPrepareTray();
     }
 }

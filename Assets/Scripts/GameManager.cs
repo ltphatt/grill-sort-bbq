@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+    public static GameManager Instance => instance;
+
     [SerializeField] GameObject grillTemplate;
 
+    [SerializeField] int allFood;
     [SerializeField] int totalFood;
     [SerializeField] int totalGrill;
     [SerializeField] Transform gridGrill;
     List<GrillStation> grillStations;
     float avgTray;
     List<Sprite> totalSpritesFood;
+    const int MAX_FOOD_PER_TRAY = 3;
 
     void Awake()
     {
         Sprite[] loadedSprites = Resources.LoadAll<Sprite>("Items");
         totalSpritesFood = new List<Sprite>(loadedSprites);
+        instance = this;
     }
 
     void Start()
@@ -28,22 +35,21 @@ public class GameManager : MonoBehaviour
     void InitLevel()
     {
         List<Sprite> takeFood = totalSpritesFood.OrderBy(x => Random.value).Take(totalFood).ToList();
-        List<Sprite> useFood = new List<Sprite>();
+        List<Sprite> useFood = new();
 
-        for (int i = 0; i < takeFood.Count; i++)
+        for (int i = 0; i < allFood; i++)
         {
-            for (int j = 0; j < 3; j++)
+            int randomFoodIndex = i % takeFood.Count;
+            for (int j = 0; j < MAX_FOOD_PER_TRAY; j++)
             {
-                useFood.Add(takeFood[i]);
+                useFood.Add(takeFood[randomFoodIndex]);
             }
         }
 
         for (int i = 0; i < useFood.Count; i++)
         {
             int rand = Random.Range(0, useFood.Count);
-            Sprite temp = useFood[i];
-            useFood[i] = useFood[rand];
-            useFood[rand] = temp;
+            (useFood[i], useFood[rand]) = (useFood[rand], useFood[i]);
         }
 
         avgTray = Random.Range(1.5f, 2f);
@@ -91,9 +97,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < result.Count; i++)
         {
             int rand = Random.Range(0, result.Count);
-            int temp = result[i];
-            result[i] = result[rand];
-            result[rand] = temp;
+            (result[rand], result[i]) = (result[i], result[rand]);
         }
 
         return result;
@@ -105,4 +109,12 @@ public class GameManager : MonoBehaviour
         grillStations = new List<GrillStation>();
     }
 
+    public void OnMinusFood()
+    {
+        allFood--;
+        if (allFood <= 0)
+        {
+            Debug.Log("You win!");
+        }
+    }
 }

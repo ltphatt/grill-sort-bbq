@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrillStation : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GrillStation : MonoBehaviour
     [SerializeField] Transform trayContainer;
     List<Tray> totalTrays;
     List<FoodSlot> totalSlots;
+    Stack<Tray> trayStack = new();
 
     void Awake()
     {
@@ -59,6 +61,8 @@ public class GrillStation : MonoBehaviour
             if (active)
             {
                 totalTrays[i].SetFoods(remainFood[i]);
+                Tray tray = totalTrays[i];
+                trayStack.Push(tray);
             }
         }
     }
@@ -96,7 +100,37 @@ public class GrillStation : MonoBehaviour
                 {
                     slot.OnActiveFood(false);
                 }
+
+                OnPrepareTray();
+                GameManager.Instance.OnMinusFood();
             }
+        }
+    }
+
+    public void OnCheckPrepareTray()
+    {
+        if (IsEmptyGrill())
+        {
+            OnPrepareTray();
+        }
+    }
+
+    void OnPrepareTray()
+    {
+        if (trayStack.Count > 0)
+        {
+            Tray item = trayStack.Pop();
+            for (int i = 0; i < item.FoodList.Count; i++)
+            {
+                Image img = item.FoodList[i];
+                if (img.gameObject.activeInHierarchy)
+                {
+                    totalSlots[i].OnPrepareItem(img);
+                    img.gameObject.SetActive(false);
+                }
+            }
+
+            item.gameObject.SetActive(false);
         }
     }
 
@@ -107,6 +141,18 @@ public class GrillStation : MonoBehaviour
         for (int i = 1; i < totalSlots.Count; i++)
         {
             if (totalSlots[i].GetSpriteFood().name != name)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool IsEmptyGrill()
+    {
+        for (int i = 0; i < totalSlots.Count; i++)
+        {
+            if (totalSlots[i].HasFood())
             {
                 return false;
             }

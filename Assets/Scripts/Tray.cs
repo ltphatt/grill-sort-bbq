@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Tray : MonoBehaviour
 {
     private List<Image> foodList;
+    public List<Image> FoodList => foodList;
 
     void Awake()
     {

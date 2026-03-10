@@ -626,7 +626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grillTemplate: {fileID: 7036061464805361026, guid: 2dd91307ed2e55a4ab35e4f13eb93d04, type: 3}
-  totalFood: 18
+  allFood: 16
+  totalFood: 12
   totalGrill: 9
   gridGrill: {fileID: 792535557}
 --- !u!114 &640141922
