@@ -50,8 +50,8 @@ public class Utils
         {
             for (int i = 0; i < list.Count; i++)
             {
-                Debug.Log("Raycast hit: " + list[i].gameObject.name);
-                T component = list[i].gameObject.GetComponentInParent<T>();
+                // T component = list[i].gameObject.GetComponentInParent<T>();
+                T component = list[i].gameObject.GetComponent<T>();
 
                 if (component != null)
                 {
