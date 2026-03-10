@@ -23,4 +23,14 @@ public class FoodSlot : MonoBehaviour
     {
         return foodImage.gameObject.activeInHierarchy;
     }
+
+    public Sprite GetSpriteFood()
+    {
+        return foodImage.sprite;
+    }
+
+    public void OnActiveFood(bool active)
+    {
+        foodImage.gameObject.SetActive(active);
+    }
 }

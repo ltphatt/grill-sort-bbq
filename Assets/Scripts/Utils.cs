@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Utils
 {
@@ -33,5 +34,32 @@ public class Utils
         }
 
         return result;
+    }
+
+    public static T GetRayCastUI<T>(Vector2 pos) where T : MonoBehaviour
+    {
+        PointerEventData pointerEventData = new(EventSystem.current)
+        {
+            position = pos
+        };
+
+        List<RaycastResult> list = new();
+        EventSystem.current.RaycastAll(pointerEventData, list);
+
+        if (list.Count > 0)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                Debug.Log("Raycast hit: " + list[i].gameObject.name);
+                T component = list[i].gameObject.GetComponentInParent<T>();
+
+                if (component != null)
+                {
+                    return component;
+                }
+            }
+        }
+
+        return null;
     }
 }
