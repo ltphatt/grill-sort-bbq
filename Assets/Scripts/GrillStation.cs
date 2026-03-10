@@ -84,4 +84,33 @@ public class GrillStation : MonoBehaviour
         }
         return null;
     }
+
+    public void OnCheckMerge()
+    {
+        if (GetEmptySlot() == null)
+        {
+            if (CheckCanMerge())
+            {
+                Debug.Log("Merge success");
+                foreach (var slot in totalSlots)
+                {
+                    slot.OnActiveFood(false);
+                }
+            }
+        }
+    }
+
+    bool CheckCanMerge()
+    {
+        string name = totalSlots[0].GetSpriteFood().name;
+
+        for (int i = 1; i < totalSlots.Count; i++)
+        {
+            if (totalSlots[i].GetSpriteFood().name != name)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

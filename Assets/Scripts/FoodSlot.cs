@@ -53,4 +53,9 @@ public class FoodSlot : MonoBehaviour
     }
 
     public FoodSlot GetEmptySlot => grillController.GetEmptySlot();
+
+    public void OnCheckMerge()
+    {
+        grillController?.OnCheckMerge();
+    }
 }

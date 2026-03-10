@@ -85,6 +85,8 @@ public class DropDragControl : MonoBehaviour
                     imageFoodDrag.gameObject.SetActive(false);
                     cacheFood.SetFoodSlot(currentFood.GetSpriteFood());
                     cacheFood.OnActiveFood(true);
+
+                    cacheFood.OnCheckMerge();
                     cacheFood = null;
                 });
             }
