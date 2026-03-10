@@ -19,4 +19,19 @@ public class Utils
 
         return result;
     }
+
+    public static List<T> TakeAndRemoveRandom<T>(List<T> source, int n)
+    {
+        List<T> result = new();
+
+        n = Mathf.Min(n, source.Count);
+        for (int i = 0; i < n; i++)
+        {
+            int randIndex = Random.Range(0, source.Count);
+            result.Add(source[randIndex]);
+            source.RemoveAt(randIndex);
+        }
+
+        return result;
+    }
 }

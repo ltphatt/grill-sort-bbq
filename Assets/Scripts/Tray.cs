@@ -16,7 +16,7 @@ public class Tray : MonoBehaviour
         }
     }
 
-    void SetFoods(List<Sprite> items)
+    public void SetFoods(List<Sprite> items)
     {
         if (items.Count > foodList.Count)
         {
