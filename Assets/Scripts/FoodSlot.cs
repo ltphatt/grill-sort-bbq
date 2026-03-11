@@ -77,4 +77,9 @@ public class FoodSlot : MonoBehaviour
     {
         grillController?.OnCheckPrepareTray();
     }
+
+    public void ShakeFood()
+    {
+        foodImage.transform.DOShakePosition(0.5f, 10f, 10, 180);
+    }
 }

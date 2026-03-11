@@ -62,4 +62,16 @@ public class Utils
 
         return null;
     }
+
+    public static void ShuffleList<T>(List<T> list)
+    {
+        List<T> result = new(list);
+        for (int i = 0; i < result.Count; i++)
+        {
+            int rand = Random.Range(0, result.Count);
+            (result[rand], result[i]) = (result[i], result[rand]);
+        }
+        list.Clear();
+        list.AddRange(result);
+    }
 }

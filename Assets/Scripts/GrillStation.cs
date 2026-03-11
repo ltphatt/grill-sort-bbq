@@ -9,6 +9,8 @@ public class GrillStation : MonoBehaviour
     [SerializeField] Transform trayContainer;
     List<Tray> totalTrays;
     List<FoodSlot> totalSlots;
+    public List<FoodSlot> TotalSlots => totalSlots;
+
     Stack<Tray> trayStack = new();
 
     void Awake()

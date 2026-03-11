@@ -6,14 +6,24 @@ using DG.Tweening;
 
 public class DropDragControl : MonoBehaviour
 {
+    [SerializeField] float suggestionTime = 10f;
     [SerializeField] Image imageFoodDrag;
     FoodSlot currentFood;
     FoodSlot cacheFood;
     bool hasDrag = false;
     Vector3 offset;
 
+    float timer = 0f;
+
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer >= suggestionTime)
+        {
+            timer = 0f;
+            GameManager.Instance.OnCheckShake();
+        }
+
         // Handle when player click on the food item
         if (Input.GetMouseButtonDown(0))
         {

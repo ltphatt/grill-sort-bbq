@@ -117,4 +117,42 @@ public class GameManager : MonoBehaviour
             Debug.Log("You win!");
         }
     }
+
+    public void OnCheckShake()
+    {
+        Dictionary<string, List<FoodSlot>> groupedFood = new();
+
+        // Create a dict to group the food name with the list of food slot
+        foreach (var grill in grillStations)
+        {
+            for (int i = 0; i < grill.TotalSlots.Count; i++)
+            {
+                FoodSlot slot = grill.TotalSlots[i];
+                if (slot.HasFood())
+                {
+                    string name = slot.GetSpriteFood().name;
+                    if (!groupedFood.ContainsKey(name))
+                    {
+                        groupedFood.Add(name, new List<FoodSlot>());
+                    }
+                    groupedFood[name].Add(slot);
+                }
+            }
+        }
+
+        foreach (var group in groupedFood)
+        {
+            if (group.Value.Count >= 3)
+            {
+                Utils.ShuffleList(group.Value);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    group.Value[i].ShakeFood();
+                }
+                break;
+            }
+        }
+    }
+
 }
