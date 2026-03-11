@@ -10,7 +10,6 @@ public class GrillStation : MonoBehaviour
     List<Tray> totalTrays;
     List<FoodSlot> totalSlots;
     public List<FoodSlot> TotalSlots => totalSlots;
-
     Stack<Tray> trayStack = new();
 
     void Awake()
@@ -167,5 +166,14 @@ public class GrillStation : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public Tray GetFirstTray()
+    {
+        if (trayStack.Count > 0)
+        {
+            return trayStack.Peek();
+        }
+        return null;
     }
 }

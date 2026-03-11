@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,9 +62,6 @@ public class GameManager : MonoBehaviour
             neededTrays = Mathf.Max(1, neededTrays);
             trayPerGrill.Add(neededTrays);
         }
-
-        Debug.Log($"Tray per grill: {string.Join(", ", trayPerGrill)}");
-        Debug.Log($"Food per grill: {string.Join(", ", foodPerGrill)}");
 
         ClearGrill();
 
@@ -168,4 +165,60 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnUseMagnet()
+    {
+        Dictionary<string, List<Image>> groups = new();
+
+        // Get all food images in the grill and the first tray of each
+        foreach (var grill in grillStations)
+        {
+            // Add images of slots to the dict
+            for (int i = 0; i < grill.TotalSlots.Count; i++)
+            {
+                FoodSlot slot = grill.TotalSlots[i];
+                if (slot.HasFood())
+                {
+                    string name = slot.GetSpriteFood().name;
+                    if (!groups.ContainsKey(name))
+                    {
+                        groups.Add(name, new List<Image>());
+                    }
+                    groups[name].Add(slot.FoodImage);
+                }
+            }
+
+            Tray tray = grill.GetFirstTray();
+            if (tray != null)
+            {
+                for (int i = 0; i < tray.FoodList.Count; i++)
+                {
+                    Image img = tray.FoodList[i];
+                    if (img.gameObject.activeInHierarchy)
+                    {
+                        string name = img.sprite.name;
+                        if (!groups.ContainsKey(name))
+                        {
+                            groups.Add(name, new List<Image>());
+                        }
+                        groups[name].Add(img);
+                    }
+                }
+            }
+        }
+
+        // Clear all food in the group that has 3 or more items
+        foreach (var kvp in groups)
+        {
+            if (kvp.Value.Count >= 3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Image imgFood = kvp.Value[i];
+                    imgFood.gameObject.SetActive(false);
+                }
+
+                break;
+            }
+        }
+    }
 }

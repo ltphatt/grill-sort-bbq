@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class FoodSlot : MonoBehaviour
 {
     [SerializeField] private Image foodImage;
+    public Image FoodImage => foodImage;
     Color normalColor = new(1f, 1f, 1f, 1f);
     Color fadeColor = new(1f, 1f, 1f, 0.6f);
 
