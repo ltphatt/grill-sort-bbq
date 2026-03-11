@@ -50,7 +50,6 @@ public class Utils
         {
             for (int i = 0; i < list.Count; i++)
             {
-                // T component = list[i].gameObject.GetComponentInParent<T>();
                 T component = list[i].gameObject.GetComponent<T>();
 
                 if (component != null)
@@ -65,13 +64,12 @@ public class Utils
 
     public static void ShuffleList<T>(List<T> list)
     {
-        List<T> result = new(list);
-        for (int i = 0; i < result.Count; i++)
+        int n = list.Count;
+        while (n > 1)
         {
-            int rand = Random.Range(0, result.Count);
-            (result[rand], result[i]) = (result[i], result[rand]);
+            n--;
+            int k = Random.Range(0, n + 1);
+            (list[k], list[n]) = (list[n], list[k]);
         }
-        list.Clear();
-        list.AddRange(result);
     }
 }

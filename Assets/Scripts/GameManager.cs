@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     List<Sprite> totalSpritesFood;
     const int MAX_FOOD_PER_TRAY = 3;
 
+    Dictionary<string, List<FoodSlot>> groupedFood = new();
+
     void Awake()
     {
         Sprite[] loadedSprites = Resources.LoadAll<Sprite>("Items");
@@ -46,24 +48,32 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < useFood.Count; i++)
-        {
-            int rand = Random.Range(0, useFood.Count);
-            (useFood[i], useFood[rand]) = (useFood[rand], useFood[i]);
-        }
-
+        // Shuffle useFood list
+        Utils.ShuffleList(useFood);
         avgTray = Random.Range(1.5f, 2f);
 
         // Calculate the total number of trays needed based on the average number of food items per tray
         int totalTray = Mathf.RoundToInt(useFood.Count / avgTray);
-        List<int> trayPerGrill = DistributeEvenly(totalGrill, totalTray);
         List<int> foodPerGrill = DistributeEvenly(totalGrill, useFood.Count);
+        List<int> trayPerGrill = new();
+        for (int i = 0; i < totalGrill; i++)
+        {
+            int neededTrays = Mathf.CeilToInt(foodPerGrill[i] / avgTray);
+            neededTrays = Mathf.Max(1, neededTrays);
+            trayPerGrill.Add(neededTrays);
+        }
+
+        Debug.Log($"Tray per grill: {string.Join(", ", trayPerGrill)}");
+        Debug.Log($"Food per grill: {string.Join(", ", foodPerGrill)}");
 
         ClearGrill();
 
         for (int i = 0; i < totalGrill; i++)
         {
-            GrillStation grill = Instantiate(grillTemplate, gridGrill).GetComponent<GrillStation>();
+            GameObject grillObject = Instantiate(grillTemplate, gridGrill);
+            grillObject.name = $"Grill_{i}";
+
+            GrillStation grill = grillObject.GetComponent<GrillStation>();
             List<Sprite> listFood = Utils.TakeAndRemoveRandom(useFood, foodPerGrill[i]);
             grill.InitGrillStation(trayPerGrill[i], listFood);
             grillStations.Add(grill);
@@ -120,7 +130,10 @@ public class GameManager : MonoBehaviour
 
     public void OnCheckShake()
     {
-        Dictionary<string, List<FoodSlot>> groupedFood = new();
+        foreach (var kvp in groupedFood)
+        {
+            kvp.Value.Clear();
+        }
 
         // Create a dict to group the food name with the list of food slot
         foreach (var grill in grillStations)
