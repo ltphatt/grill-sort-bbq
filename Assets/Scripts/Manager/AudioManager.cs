@@ -18,8 +18,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] SoundConfig[] bgmConfigs;
     [SerializeField] SoundConfig[] sfxConfigs;
 
-    Dictionary<string, AudioClip> bgmDict = new();
-    Dictionary<string, AudioClip> sfxDict = new();
+    readonly Dictionary<string, AudioClip> bgmDict = new();
+    readonly Dictionary<string, AudioClip> sfxDict = new();
 
     AudioSource bgmSource;
     AudioSource sfxSource;
