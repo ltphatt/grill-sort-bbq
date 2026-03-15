@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     [SerializeField] GameObject grillTemplate;
-
     [SerializeField] int allFood;
     [SerializeField] int totalFood;
     [SerializeField] int totalGrill;
@@ -119,6 +118,8 @@ public class GameManager : MonoBehaviour
     public void OnMinusFood()
     {
         allFood--;
+        AudioManager.Instance.PlayMinusFoodSFX();
+
         if (allFood <= 0)
         {
             Debug.Log("You win!");

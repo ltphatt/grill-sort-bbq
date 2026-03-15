@@ -9,8 +9,9 @@ public class LoadManager : MonoBehaviour
 {
     [SerializeField] Slider loadingBar;
     [SerializeField] TextMeshProUGUI loadingText;
-
     [SerializeField] float delay = 3f;
+
+    [SerializeField] string homeSceneName = "Home";
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class LoadManager : MonoBehaviour
     // Pseudo loading screen
     IEnumerator LoadScene()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync("Main");
+        AsyncOperation operation = SceneManager.LoadSceneAsync(this.homeSceneName);
 
         operation.allowSceneActivation = false;
 
