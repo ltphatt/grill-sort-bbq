@@ -165,6 +165,7 @@ public class GrillStation : MonoBehaviour
                 return false;
             }
         }
+
         return true;
     }
 
@@ -175,5 +176,45 @@ public class GrillStation : MonoBehaviour
             return trayStack.Peek();
         }
         return null;
+    }
+
+    public List<Image> GetListFoodActive()
+    {
+        List<Image> result = new();
+        for (int i = 0; i < totalSlots.Count; i++)
+        {
+            if (totalSlots[i].HasFood())
+            {
+                result.Add(totalSlots[i].FoodImage);
+            }
+        }
+
+        for (int i = 0; i < totalTrays.Count; i++)
+        {
+            Tray tray = totalTrays[i];
+            if (tray.gameObject.activeInHierarchy)
+            {
+                for (int j = 0; j < tray.FoodList.Count; j++)
+                {
+                    if (tray.FoodList[j].gameObject.activeInHierarchy)
+                    {
+                        result.Add(tray.FoodList[j]);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public void OnPlayShuffeVFX()
+    {
+        for (int i = 0; i < totalSlots.Count; i++)
+        {
+            if (totalSlots[i].HasFood())
+            {
+                totalSlots[i].OnShuffleFood();
+            }
+        }
     }
 }

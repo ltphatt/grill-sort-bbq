@@ -118,6 +118,8 @@ public class GameManager : MonoBehaviour
     public void OnMinusFood()
     {
         allFood--;
+        Debug.Log($"Food removed, remaining food: {allFood}");
+
         AudioManager.Instance.PlayMinusFoodSFX();
 
         if (allFood <= 0)
@@ -216,9 +218,41 @@ public class GameManager : MonoBehaviour
                 {
                     Image imgFood = kvp.Value[i];
                     imgFood.gameObject.SetActive(false);
+                    imgFood.gameObject.SendMessageUpwards("OnCheckPrepareTray");
                 }
 
                 break;
+            }
+        }
+    }
+
+    public void OnShuffle()
+    {
+        StartCoroutine(IEShuffle());
+
+        IEnumerator IEShuffle()
+        {
+            List<Image> results = new();
+
+            // Get all food images in the grill and in the trays
+            foreach (var grill in grillStations)
+            {
+                results.AddRange(grill.GetListFoodActive());
+                grill.OnPlayShuffeVFX();
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < results.Count; i++)
+            {
+                int rand = Random.Range(0, results.Count);
+
+                // Swap the sprites of the two images
+                (results[rand].sprite, results[i].sprite) = (results[i].sprite, results[rand].sprite);
+
+                // Set native size
+                results[i].SetNativeSize();
+                results[rand].SetNativeSize();
             }
         }
     }

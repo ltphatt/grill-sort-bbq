@@ -83,4 +83,9 @@ public class FoodSlot : MonoBehaviour
     {
         foodImage.transform.DOShakePosition(0.5f, 10f, 10, 180);
     }
+
+    public void OnShuffleFood()
+    {
+        foodImage.DOFade(0f, 0.5f).SetLoops(2, LoopType.Yoyo);
+    }
 }
