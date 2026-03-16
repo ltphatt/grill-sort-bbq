@@ -127,6 +127,8 @@ public class GrillStation : MonoBehaviour
     {
         if (trayStack.Count > 0)
         {
+            Debug.Log("Prepare new tray of grill " + gameObject.name);
+
             Tray item = trayStack.Pop();
             for (int i = 0; i < item.FoodList.Count; i++)
             {

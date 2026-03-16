@@ -43,4 +43,24 @@ public class Tray : MonoBehaviour
         return foodList[randomIndex];
     }
 
+    public void OnCheckPrepareTray()
+    {
+        if (IsEmptyTray())
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    public bool IsEmptyTray()
+    {
+        foreach (var food in foodList)
+        {
+            if (food.gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
