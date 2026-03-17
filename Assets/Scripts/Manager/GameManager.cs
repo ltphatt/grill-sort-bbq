@@ -6,35 +6,33 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public event System.Action OnCompleteLevel;
+    public event System.Action<int> OnUpdateLevel;
     private static GameManager instance;
     public static GameManager Instance => instance;
 
     [SerializeField] GameObject grillTemplate;
-    [SerializeField] int allFood;
-    [SerializeField] int totalFood;
-    [SerializeField] int totalGrill;
     [SerializeField] Transform gridGrill;
     List<GrillStation> grillStations;
     float avgTray;
     List<Sprite> totalSpritesFood;
     const int MAX_FOOD_PER_TRAY = 3;
+    int allFood;
 
     Dictionary<string, List<FoodSlot>> groupedFood = new();
 
     void Awake()
     {
+        instance = this;
+
         Sprite[] loadedSprites = Resources.LoadAll<Sprite>("Items");
         totalSpritesFood = new List<Sprite>(loadedSprites);
-        instance = this;
     }
 
-    void Start()
+    public void InitLevel(int level, int allFood, int totalFood, int totalGrill)
     {
-        InitLevel();
-    }
+        this.allFood = allFood;
 
-    void InitLevel()
-    {
         List<Sprite> takeFood = totalSpritesFood.OrderBy(x => Random.value).Take(totalFood).ToList();
         List<Sprite> useFood = new();
 
@@ -74,6 +72,8 @@ public class GameManager : MonoBehaviour
             grill.InitGrillStation(trayPerGrill[i], listFood);
             grillStations.Add(grill);
         }
+
+        OnUpdateLevel?.Invoke(level);
     }
 
     List<int> DistributeEvenly(int grillCount, int totalTrays)
@@ -118,13 +118,12 @@ public class GameManager : MonoBehaviour
     public void OnMinusFood()
     {
         allFood--;
-        Debug.Log($"Food removed, remaining food: {allFood}");
-
         AudioManager.Instance.PlayMinusFoodSFX();
 
         if (allFood <= 0)
         {
-            Debug.Log("You win!");
+            AudioManager.Instance.PlaySFX("COMPLETE_LEVEL");
+            OnCompleteLevel?.Invoke();
         }
     }
 
@@ -228,6 +227,8 @@ public class GameManager : MonoBehaviour
 
     public void OnShuffle()
     {
+        AudioManager.Instance.PlaySFX("SHUFFLE");
+
         StartCoroutine(IEShuffle());
 
         IEnumerator IEShuffle()
