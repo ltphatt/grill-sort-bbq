@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int totalFood;
     [SerializeField] int totalGrill;
 
+    public int LevelDuration = 120;
+
     void Awake()
     {
         Instance = this;

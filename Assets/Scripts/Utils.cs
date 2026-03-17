@@ -72,4 +72,11 @@ public class Utils
             (list[k], list[n]) = (list[n], list[k]);
         }
     }
+
+    public static string ConvertToTime(int time)
+    {
+        float min = Mathf.FloorToInt(time / 60);
+        float sec = Mathf.FloorToInt(time % 60);
+        return string.Format("{0:00}:{1:00}", min, sec);
+    }
 }
