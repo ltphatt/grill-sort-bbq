@@ -36,4 +36,20 @@ public class LevelManager : MonoBehaviour
     {
         GameManager.Instance.OnCompleteLevel -= NextLevel;
     }
+
+    public void PauseLevel()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeLevel()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void RestartLevel()
+    {
+        Time.timeScale = 1f;
+        GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
+    }
 }

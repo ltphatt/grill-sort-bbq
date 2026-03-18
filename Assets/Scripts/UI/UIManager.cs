@@ -11,8 +11,16 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerTxt;
     public Image timerFill;
 
+    [Header("Game Popups")]
+    public GameObject pausePopup;
+
     int totalTime = 0;
     int timeRemaining = 0;
+
+    void Awake()
+    {
+        pausePopup.SetActive(false);
+    }
 
     void Start()
     {
