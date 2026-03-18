@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI timerTxt;
+    public Image timerFill;
 
+    int totalTime = 0;
     int timeRemaining = 0;
 
     void Start()
@@ -15,6 +19,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnUpdateLevel += UpdateLevel;
         UpdateLevel(LevelManager.Instance.currentLevel);
 
+        totalTime = LevelManager.Instance.LevelDuration;
         timeRemaining = LevelManager.Instance.LevelDuration;
         StartCoroutine(StartCountdown());
     }
@@ -22,6 +27,7 @@ public class UIManager : MonoBehaviour
     void OnDestroy()
     {
         GameManager.Instance.OnUpdateLevel -= UpdateLevel;
+        timerFill.DOKill();
     }
 
     public void UpdateLevel(int level)
@@ -35,8 +41,14 @@ public class UIManager : MonoBehaviour
         while (timeRemaining > 0)
         {
             timerTxt.text = Utils.ConvertToTime(timeRemaining);
+            timerFill.DOFillAmount((float)timeRemaining / totalTime, 1f)
+                .SetEase(Ease.Linear);
+
             yield return new WaitForSeconds(1f);
             timeRemaining--;
         }
+
+        timerTxt.text = Utils.ConvertToTime(0);
+        timerFill.DOFillAmount(0, 0);
     }
 }
