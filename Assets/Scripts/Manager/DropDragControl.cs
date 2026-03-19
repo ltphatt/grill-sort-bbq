@@ -31,6 +31,9 @@ public class DropDragControl : MonoBehaviour
 
             if (currentFood != null && currentFood.HasFood())
             {
+                Debug.Log("Start Drag: " + currentFood.name);
+                AudioManager.Instance.PlaySFX("PICK_UP_FOOD");
+
                 hasDrag = true;
                 cacheFood = currentFood;
 
@@ -96,6 +99,8 @@ public class DropDragControl : MonoBehaviour
             {
                 imageFoodDrag.transform.DOMove(cacheFood.transform.position, 0.15f).OnComplete(() =>
                 {
+                    AudioManager.Instance.PlaySFX("SMOKE");
+
                     imageFoodDrag.gameObject.SetActive(false);
                     cacheFood.SetFoodSlot(currentFood.GetSpriteFood());
                     cacheFood.OnActiveFood(true);

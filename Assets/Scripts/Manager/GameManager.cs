@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance => instance;
-
     [SerializeField] GameObject grillTemplate;
     [SerializeField] Transform gridGrill;
     List<GrillStation> grillStations;
@@ -116,7 +115,7 @@ public class GameManager : MonoBehaviour
     public void OnMinusFood()
     {
         allFood--;
-        AudioManager.Instance.PlayMinusFoodSFX();
+        Observer.Notify(EventMessage.ON_MERGE_FOOD);
 
         if (allFood <= 0)
         {

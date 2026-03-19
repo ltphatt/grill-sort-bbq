@@ -44,11 +44,13 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
+        Observer.AddObserver(EventMessage.ON_MERGE_FOOD, PlayMinusFoodSFX);
     }
 
     void OnDestroy()
     {
         Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
+        Observer.RemoveObserver(EventMessage.ON_MERGE_FOOD, PlayMinusFoodSFX);
     }
 
     void InitAudioSources()
@@ -117,7 +119,7 @@ public class AudioManager : MonoBehaviour
         sfxSource.Stop();
     }
 
-    public void PlayMinusFoodSFX()
+    public void PlayMinusFoodSFX(object[] data)
     {
         int randomKey = UnityEngine.Random.Range(1, 9);
         PlaySFX($"{randomKey}");
