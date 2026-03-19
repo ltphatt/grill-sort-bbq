@@ -10,7 +10,6 @@ public class HomeManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(mainSceneName);
-        AudioManager.Instance.StopBGM();
     }
 
 }

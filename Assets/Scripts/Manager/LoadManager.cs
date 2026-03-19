@@ -44,6 +44,6 @@ public class LoadManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         operation.allowSceneActivation = true;
-        AudioManager.Instance.PlayBGM("Casual");
+        AudioManager.Instance.PlayBGM("Casual", 0.75f);
     }
 }

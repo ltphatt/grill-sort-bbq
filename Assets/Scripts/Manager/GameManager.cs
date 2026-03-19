@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public event System.Action OnCompleteLevel;
-    public event System.Action<int> OnUpdateLevel;
     private static GameManager instance;
     public static GameManager Instance => instance;
 
@@ -73,7 +71,7 @@ public class GameManager : MonoBehaviour
             grillStations.Add(grill);
         }
 
-        OnUpdateLevel?.Invoke(level);
+        Observer.Notify(EventMessage.ON_UPDATE_LEVEL, level);
     }
 
     List<int> DistributeEvenly(int grillCount, int totalTrays)
@@ -122,8 +120,8 @@ public class GameManager : MonoBehaviour
 
         if (allFood <= 0)
         {
-            AudioManager.Instance.PlaySFX("COMPLETE_LEVEL");
-            OnCompleteLevel?.Invoke();
+            allFood = 0;
+            Observer.Notify(EventMessage.ON_COMPLETE_LEVEL);
         }
     }
 

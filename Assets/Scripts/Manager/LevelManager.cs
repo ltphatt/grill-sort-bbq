@@ -18,23 +18,25 @@ public class LevelManager : MonoBehaviour
         Instance = this;
     }
 
+    void OnEnable()
+    {
+        Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
+    }
+
     void Start()
     {
-        GameManager.Instance.OnCompleteLevel += NextLevel;
-
         currentLevel = 1;
         GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
     }
 
-    public void NextLevel()
+    void OnDisable()
     {
-        currentLevel++;
-        GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
+        Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
     }
 
-    void OnDestroy()
+    public void NextLevel(object[] data)
     {
-        GameManager.Instance.OnCompleteLevel -= NextLevel;
+        currentLevel++;
     }
 
     public void PauseLevel()
@@ -50,6 +52,11 @@ public class LevelManager : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+        GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
+    }
+
+    public void ToNextLevel()
+    {
         GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
     }
 }

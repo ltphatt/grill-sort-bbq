@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmConfigs:
   - key: Casual
-    clip: {fileID: 8300000, guid: 76fc662b5e57d184491a97d7a67b63f9, type: 3}
+    clip: {fileID: 8300000, guid: 6138a8c194451324797e6a9783716f99, type: 3}
   sfxConfigs:
   - key: 1
     clip: {fileID: 8300000, guid: f19c938256b69c949b0af82d7948e8bc, type: 3}

@@ -14,34 +14,49 @@ public class UIManager : MonoBehaviour
     [Header("Game Popups")]
     public GameObject pausePopup;
 
+    [Header("Game Canvas")]
+    public Canvas resultCanvas;
+
     int totalTime = 0;
     int timeRemaining = 0;
 
     void Awake()
     {
         pausePopup.SetActive(false);
+        resultCanvas.gameObject.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        Observer.AddObserver(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
+        Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
     }
 
     void Start()
     {
-        GameManager.Instance.OnUpdateLevel += UpdateLevel;
-        UpdateLevel(LevelManager.Instance.currentLevel);
-
         totalTime = LevelManager.Instance.LevelDuration;
         timeRemaining = LevelManager.Instance.LevelDuration;
         StartCoroutine(StartCountdown());
     }
 
+    void OnDisable()
+    {
+        Observer.RemoveObserver(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
+        Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
+    }
+
     void OnDestroy()
     {
-        GameManager.Instance.OnUpdateLevel -= UpdateLevel;
         timerFill.DOKill();
     }
 
-    public void UpdateLevel(int level)
+    public void UpdateLevel(object[] data)
     {
+        int level = (int)data[0];
         timeRemaining = LevelManager.Instance.LevelDuration;
         levelTxt.text = $"Lv.{level}";
+
+        Debug.Log("[UIManager] UpdateLevel: " + level);
     }
 
     IEnumerator StartCountdown()
@@ -58,5 +73,10 @@ public class UIManager : MonoBehaviour
 
         timerTxt.text = Utils.ConvertToTime(0);
         timerFill.DOFillAmount(0, 0);
+    }
+
+    void ShowResultPopup(object[] data)
+    {
+        resultCanvas.gameObject.SetActive(true);
     }
 }

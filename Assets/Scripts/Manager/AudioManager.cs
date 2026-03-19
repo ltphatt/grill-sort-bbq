@@ -41,10 +41,21 @@ public class AudioManager : MonoBehaviour
         InitSoundDicts();
     }
 
+    void Start()
+    {
+        Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
+    }
+
+    void OnDestroy()
+    {
+        Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
+    }
+
     void InitAudioSources()
     {
         bgmSource = gameObject.AddComponent<AudioSource>();
         bgmSource.loop = true;
+        bgmSource.volume = .5f;
 
         sfxSource = gameObject.AddComponent<AudioSource>();
         sfxSource.loop = false;
@@ -65,13 +76,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayBGM(string key)
+    public void PlayBGM(string key, float volume = 0.5f, bool isLoop = true)
     {
         if (bgmDict.TryGetValue(key, out var clip))
         {
             if (bgmSource.clip == clip && bgmSource.isPlaying) return;
 
             bgmSource.clip = clip;
+            bgmSource.volume = volume;
+            bgmSource.loop = isLoop;
             bgmSource.Play();
         }
         else
@@ -85,10 +98,12 @@ public class AudioManager : MonoBehaviour
         bgmSource.Stop();
     }
 
-    public void PlaySFX(string key)
+    public void PlaySFX(string key, float volume = 1f, bool isLoop = false)
     {
         if (sfxDict.TryGetValue(key, out var clip))
         {
+            sfxSource.volume = volume;
+            sfxSource.loop = isLoop;
             sfxSource.PlayOneShot(clip);
         }
         else
@@ -106,5 +121,10 @@ public class AudioManager : MonoBehaviour
     {
         int randomKey = UnityEngine.Random.Range(1, 9);
         PlaySFX($"{randomKey}");
+    }
+
+    void PlayCompleteLevelSFX(object[] data)
+    {
+        PlaySFX("COMPLETE_LEVEL");
     }
 }
