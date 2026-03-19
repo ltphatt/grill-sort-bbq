@@ -31,7 +31,6 @@ public class DropDragControl : MonoBehaviour
 
             if (currentFood != null && currentFood.HasFood())
             {
-                Debug.Log("Start Drag: " + currentFood.name);
                 AudioManager.Instance.PlaySFX("PICK_UP_FOOD");
 
                 hasDrag = true;

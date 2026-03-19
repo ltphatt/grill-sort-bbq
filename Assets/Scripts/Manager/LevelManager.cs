@@ -6,11 +6,9 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
     public int currentLevel = 1;
-
     [SerializeField] int allFood;
     [SerializeField] int totalFood;
     [SerializeField] int totalGrill;
-
     public int LevelDuration = 120;
 
     void Awake()

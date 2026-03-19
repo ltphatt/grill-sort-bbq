@@ -67,10 +67,12 @@ MonoBehaviour:
   - key: SHUFFLE
     clip: {fileID: 8300000, guid: 2c0cd4379d888a343ad1e830b73aa593, type: 3}
   - key: COMPLETE_LEVEL
-    clip: {fileID: 8300000, guid: a0e7dad068f50bd459899adaa55efe67, type: 3}
+    clip: {fileID: 8300000, guid: 67ce0c4e089ced44dbe205f634359c20, type: 3}
   - key: CLICK
     clip: {fileID: 8300000, guid: cb651c03ed3630c45af69cf5dd0d161e, type: 3}
   - key: PICK_UP_FOOD
     clip: {fileID: 8300000, guid: f9cc7fcf729b81d40956993799a3debb, type: 3}
   - key: SMOKE
     clip: {fileID: 8300000, guid: 9d31f5c3fbdc5b448950691d1f64f11a, type: 3}
+  - key: TIME_BONUS
+    clip: {fileID: 8300000, guid: f3028d79b9f53a043995789974d7997a, type: 3}

@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     {
         Observer.AddObserver(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
         Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
+        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_TIME, AddLevelTime);
     }
 
     void Start()
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
     {
         Observer.RemoveObserver(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
         Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
+        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_TIME, AddLevelTime);
     }
 
     void OnDestroy()
@@ -55,8 +57,6 @@ public class UIManager : MonoBehaviour
         int level = (int)data[0];
         timeRemaining = LevelManager.Instance.LevelDuration;
         levelTxt.text = $"Lv.{level}";
-
-        Debug.Log("[UIManager] UpdateLevel: " + level);
     }
 
     IEnumerator StartCountdown()
@@ -73,6 +73,16 @@ public class UIManager : MonoBehaviour
 
         timerTxt.text = Utils.ConvertToTime(0);
         timerFill.DOFillAmount(0, 0);
+    }
+
+    void AddLevelTime(object[] data)
+    {
+        int seconds = (int)data[0];
+
+        timeRemaining = Mathf.Clamp(timeRemaining + seconds, 0, totalTime);
+        timerTxt.text = Utils.ConvertToTime(timeRemaining);
+        timerFill.DOFillAmount((float)timeRemaining / totalTime, 0.5f)
+            .SetEase(Ease.Linear);
     }
 
     void ShowResultPopup(object[] data)

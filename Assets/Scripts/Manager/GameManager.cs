@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     List<Sprite> totalSpritesFood;
     const int MAX_FOOD_PER_TRAY = 3;
     int allFood;
-
     Dictionary<string, List<FoodSlot>> groupedFood = new();
 
     void Awake()
@@ -24,6 +23,18 @@ public class GameManager : MonoBehaviour
 
         Sprite[] loadedSprites = Resources.LoadAll<Sprite>("Items");
         totalSpritesFood = new List<Sprite>(loadedSprites);
+    }
+
+    void Start()
+    {
+        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_MAGNET, OnUseMagnet);
+        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
+    }
+
+    void OnDestroy()
+    {
+        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_MAGNET, OnUseMagnet);
+        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
     }
 
     public void InitLevel(int level, int allFood, int totalFood, int totalGrill)
@@ -164,7 +175,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnUseMagnet()
+    void OnUseMagnet(object[] data)
     {
         Dictionary<string, List<Image>> groups = new();
 
@@ -222,10 +233,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnShuffle()
+    void OnShuffle(object[] data)
     {
-        AudioManager.Instance.PlaySFX("SHUFFLE");
-
         StartCoroutine(IEShuffle());
 
         IEnumerator IEShuffle()
@@ -254,5 +263,4 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
 }
