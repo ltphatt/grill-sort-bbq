@@ -5,34 +5,34 @@ using UnityEngine;
 
 public class Observer
 {
-    static Dictionary<EventMessage, List<Action<object[]>>> Listeners = new();
+    private static readonly Dictionary<EventMessage, List<Action<object[]>>> listeners = new();
 
     public static void AddObserver(EventMessage message, Action<object[]> callback)
     {
-        if (!Listeners.ContainsKey(message))
+        if (!listeners.ContainsKey(message))
         {
-            Listeners[message] = new List<Action<object[]>>();
+            listeners[message] = new List<Action<object[]>>();
         }
 
-        Listeners[message].Add(callback);
+        listeners[message].Add(callback);
     }
 
     public static void RemoveObserver(EventMessage message, Action<object[]> callback)
     {
-        if (Listeners.ContainsKey(message))
+        if (listeners.ContainsKey(message))
         {
-            Listeners[message].Remove(callback);
+            listeners[message].Remove(callback);
         }
     }
 
     public static void Notify(EventMessage message, params object[] data)
     {
-        if (!Listeners.ContainsKey(message))
+        if (!listeners.ContainsKey(message))
         {
             return;
         }
 
-        foreach (var callback in Listeners[message])
+        foreach (var callback in listeners[message])
         {
             try
             {
