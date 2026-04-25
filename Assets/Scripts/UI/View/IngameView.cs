@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class IngameView : BaseView
 {
-
+    public void OnHomeButtonClicked()
+    {
+        ViewController.Ins.ShowView(ViewType.Home, false);
+    }
 }
