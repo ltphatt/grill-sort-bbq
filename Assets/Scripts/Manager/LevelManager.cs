@@ -21,12 +21,6 @@ public class LevelManager : MonoBehaviour
         Observer.Subscribe(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
     }
 
-    void Start()
-    {
-        currentLevel = 1;
-        GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
-    }
-
     void OnDisable()
     {
         Observer.Unsubscribe(EventMessage.ON_COMPLETE_LEVEL, NextLevel);

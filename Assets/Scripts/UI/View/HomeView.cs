@@ -7,5 +7,6 @@ public class HomeView : BaseView
     public void StartGame()
     {
         ViewController.Ins.ShowView(ViewType.Ingame);
+        LevelManager.Instance.ToNextLevel();
     }
 }

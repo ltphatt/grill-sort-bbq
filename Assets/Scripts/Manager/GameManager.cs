@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance => instance;
+    public static GameManager Instance;
+
     [SerializeField] GameObject grillTemplate;
     [SerializeField] Transform gridGrill;
-    List<GrillStation> grillStations;
+    List<GrillStation> grillStations = new();
     float avgTray;
     List<Sprite> totalSpritesFood;
     const int MAX_FOOD_PER_TRAY = 3;
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
 
         Sprite[] loadedSprites = Resources.LoadAll<Sprite>("Items");
         totalSpritesFood = new List<Sprite>(loadedSprites);

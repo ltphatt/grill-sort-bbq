@@ -102,7 +102,6 @@ public class GrillStation : MonoBehaviour
         {
             if (CheckCanMerge())
             {
-                Debug.Log("Merge success");
                 foreach (var slot in totalSlots)
                 {
                     slot.OnActiveFood(false);

@@ -61,6 +61,7 @@ public class ViewController : MonoBehaviour
             }
             currentView.Hide();
         }
+
         nextView.Show();
         currentView = nextView;
         Debug.Log($"Show view: {viewType}, save history: {saveHistory}");
