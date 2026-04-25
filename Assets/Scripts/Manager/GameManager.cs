@@ -27,14 +27,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_MAGNET, OnUseMagnet);
-        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
+        Observer.Subscribe(EventMessage.ON_USE_BOOSTER_MAGNET, OnUseMagnet);
+        Observer.Subscribe(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
     }
 
     void OnDestroy()
     {
-        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_MAGNET, OnUseMagnet);
-        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
+        Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_MAGNET, OnUseMagnet);
+        Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
     }
 
     public void InitLevel(int level, int allFood, int totalFood, int totalGrill)

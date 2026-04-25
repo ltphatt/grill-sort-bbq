@@ -10,7 +10,7 @@ public class LoadManager : MonoBehaviour
     [SerializeField] Slider loadingBar;
     [SerializeField] TextMeshProUGUI loadingText;
     [SerializeField] float delay = 3f;
-    [SerializeField] string homeSceneName = "Home";
+    [SerializeField] string homeSceneName = "Main";
 
     void Start()
     {

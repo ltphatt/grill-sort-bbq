@@ -28,9 +28,9 @@ public class UIManager : MonoBehaviour
 
     void OnEnable()
     {
-        Observer.AddObserver(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
-        Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
-        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_TIME, AddLevelTime);
+        Observer.Subscribe(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
+        Observer.Subscribe(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
+        Observer.Subscribe(EventMessage.ON_USE_BOOSTER_TIME, AddLevelTime);
     }
 
     void Start()
@@ -42,9 +42,9 @@ public class UIManager : MonoBehaviour
 
     void OnDisable()
     {
-        Observer.RemoveObserver(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
-        Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
-        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_TIME, AddLevelTime);
+        Observer.Unsubscribe(EventMessage.ON_UPDATE_LEVEL, UpdateLevel);
+        Observer.Unsubscribe(EventMessage.ON_COMPLETE_LEVEL, ShowResultPopup);
+        Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_TIME, AddLevelTime);
     }
 
     void OnDestroy()

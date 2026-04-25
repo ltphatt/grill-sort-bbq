@@ -341,8 +341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBar: {fileID: 1425171164}
   loadingText: {fileID: 888718241}
-  delay: 3
-  homeSceneName: Home
+  delay: 1
+  homeSceneName: Main
 --- !u!1 &307251814
 GameObject:
   m_ObjectHideFlags: 0

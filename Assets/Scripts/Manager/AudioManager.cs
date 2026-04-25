@@ -43,16 +43,16 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
-        Observer.AddObserver(EventMessage.ON_MERGE_FOOD, PlayMinusFoodSFX);
-        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_SHUFFLE, (object[] data) => PlaySFX("SHUFFLE"));
+        Observer.Subscribe(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
+        Observer.Subscribe(EventMessage.ON_MERGE_FOOD, PlayMinusFoodSFX);
+        Observer.Subscribe(EventMessage.ON_USE_BOOSTER_SHUFFLE, (object[] data) => PlaySFX("SHUFFLE"));
     }
 
     void OnDestroy()
     {
-        Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
-        Observer.RemoveObserver(EventMessage.ON_MERGE_FOOD, PlayMinusFoodSFX);
-        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_SHUFFLE, (object[] data) => PlaySFX("SHUFFLE"));
+        Observer.Unsubscribe(EventMessage.ON_COMPLETE_LEVEL, PlayCompleteLevelSFX);
+        Observer.Unsubscribe(EventMessage.ON_MERGE_FOOD, PlayMinusFoodSFX);
+        Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_SHUFFLE, (object[] data) => PlaySFX("SHUFFLE"));
     }
 
     void InitAudioSources()

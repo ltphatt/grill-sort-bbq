@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     void OnEnable()
     {
-        Observer.AddObserver(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
+        Observer.Subscribe(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
     }
 
     void Start()
@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
 
     void OnDisable()
     {
-        Observer.RemoveObserver(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
+        Observer.Unsubscribe(EventMessage.ON_COMPLETE_LEVEL, NextLevel);
     }
 
     public void NextLevel(object[] data)

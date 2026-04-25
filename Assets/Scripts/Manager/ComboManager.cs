@@ -20,12 +20,12 @@ public class ComboManager : MonoBehaviour
 
     void OnEnable()
     {
-        Observer.AddObserver(EventMessage.ON_MERGE_FOOD, OnMergeFood);
+        Observer.Subscribe(EventMessage.ON_MERGE_FOOD, OnMergeFood);
     }
 
     void OnDisable()
     {
-        Observer.RemoveObserver(EventMessage.ON_MERGE_FOOD, OnMergeFood);
+        Observer.Unsubscribe(EventMessage.ON_MERGE_FOOD, OnMergeFood);
     }
 
     void Update()

@@ -29,7 +29,6 @@ public class GrillStation : MonoBehaviour
         // Handle the first tray - grill
         int firstGrillFoodCount = Random.Range(1, maxFoodForFirstGrill + 1);
         List<Sprite> firstGrillFood = Utils.TakeAndRemoveRandom(foods, firstGrillFoodCount);
-        // Debug.Log($"First grill food count: {firstGrillFoodCount}, foods left: {foods.Count}");
 
         for (int i = 0; i < firstGrillFoodCount; i++)
         {

@@ -26,8 +26,8 @@ public class EffectManager : MonoBehaviour
 
     void OnEnable()
     {
-        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_MAGNET, ShowMagnetEffect);
-        Observer.AddObserver(EventMessage.ON_USE_BOOSTER_TIME, ShowTimerEffect);
+        Observer.Subscribe(EventMessage.ON_USE_BOOSTER_MAGNET, ShowMagnetEffect);
+        Observer.Subscribe(EventMessage.ON_USE_BOOSTER_TIME, ShowTimerEffect);
     }
 
     void Start()
@@ -37,8 +37,8 @@ public class EffectManager : MonoBehaviour
 
     void OnDisable()
     {
-        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_MAGNET, ShowMagnetEffect);
-        Observer.RemoveObserver(EventMessage.ON_USE_BOOSTER_TIME, ShowTimerEffect);
+        Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_MAGNET, ShowMagnetEffect);
+        Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_TIME, ShowTimerEffect);
     }
 
     void ShowMagnetEffect(object[] data)

@@ -7,7 +7,7 @@ public class Observer
 {
     private static readonly Dictionary<EventMessage, List<Action<object[]>>> listeners = new();
 
-    public static void AddObserver(EventMessage message, Action<object[]> callback)
+    public static void Subscribe(EventMessage message, Action<object[]> callback)
     {
         if (!listeners.ContainsKey(message))
         {
@@ -17,7 +17,7 @@ public class Observer
         listeners[message].Add(callback);
     }
 
-    public static void RemoveObserver(EventMessage message, Action<object[]> callback)
+    public static void Unsubscribe(EventMessage message, Action<object[]> callback)
     {
         if (listeners.ContainsKey(message))
         {
