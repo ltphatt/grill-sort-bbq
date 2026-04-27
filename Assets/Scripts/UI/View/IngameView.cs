@@ -14,4 +14,9 @@ public class IngameView : BaseView
     {
         ViewController.Ins.ShowView(ViewType.Home, false);
     }
+
+    public void OnPauseButtonClicked()
+    {
+        PopupController.Ins.Show(PopupType.Pause);
+    }
 }

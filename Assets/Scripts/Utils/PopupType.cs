@@ -1,5 +1,5 @@
 public enum PopupType
 {
-    HomeSettings,
-    IngameSettings,
+    Settings,
+    Pause,
 }

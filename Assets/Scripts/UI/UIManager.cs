@@ -11,9 +11,6 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerTxt;
     public Image timerFill;
 
-    [Header("Game Popups")]
-    public GameObject pausePopup;
-
     [Header("Game Canvas")]
     public Canvas resultCanvas;
 
@@ -22,7 +19,6 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        pausePopup.SetActive(false);
         resultCanvas.gameObject.SetActive(false);
     }
 

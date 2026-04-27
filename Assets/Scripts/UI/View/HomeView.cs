@@ -18,6 +18,6 @@ public class HomeView : BaseView
 
     public void OnHomeSettingsButtonClicked()
     {
-        PopupController.Ins.Show(PopupType.HomeSettings);
+        PopupController.Ins.Show(PopupType.Settings);
     }
 }
