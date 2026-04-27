@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ViewController : MonoBehaviour
 {
-    public static ViewController Ins;
+    public static ViewController Instance;
     [SerializeField] private List<BaseView> views;
     [SerializeField] ViewType startView = ViewType.Home;
     Dictionary<ViewType, BaseView> viewDictionary = new();
@@ -13,12 +13,12 @@ public class ViewController : MonoBehaviour
 
     void Awake()
     {
-        if (Ins != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        Ins = this;
+        Instance = this;
         InitViews();
     }
 

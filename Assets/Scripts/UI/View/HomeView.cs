@@ -12,12 +12,12 @@ public class HomeView : BaseView
 
     public void StartGame()
     {
-        ViewController.Ins.ShowView(ViewType.Ingame);
+        ViewController.Instance.ShowView(ViewType.Ingame);
         GameController.Instance.ToNextLevel();
     }
 
     public void OnHomeSettingsButtonClicked()
     {
-        PopupController.Ins.Show(PopupType.Settings);
+        PopupController.Instance.Show(PopupType.Settings);
     }
 }

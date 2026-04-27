@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4899964227901566350}
   - component: {fileID: 3191491024722118333}
   - component: {fileID: 2789015238018429228}
+  - component: {fileID: 2419018671653622306}
   m_Layer: 5
   m_Name: RestartBtn
   m_TagString: Untagged
@@ -254,7 +255,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3191491024722118333}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3362760817483113927}
+        m_TargetAssemblyTypeName: PausePopup, Assembly-CSharp
+        m_MethodName: OnRestartButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2419018671653622306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515043446254086602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c84692c19c81a54898a355487dd89fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundKey: CLICK
 --- !u!1 &1523562569555155861
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +655,7 @@ GameObject:
   - component: {fileID: 7976413385263698940}
   - component: {fileID: 4132694341986281201}
   - component: {fileID: 2955326669277983649}
+  - component: {fileID: 7335173719199184428}
   m_Layer: 5
   m_Name: CloseBtn
   m_TagString: Untagged
@@ -737,6 +764,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7335173719199184428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380466797666906128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c84692c19c81a54898a355487dd89fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundKey: CLICK
 --- !u!1 &3521885474619348210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,6 +1276,7 @@ GameObject:
   - component: {fileID: 6373482345426222397}
   - component: {fileID: 5963156519016941846}
   - component: {fileID: 3043056433275817831}
+  - component: {fileID: 4075312260079105156}
   m_Layer: 5
   m_Name: ResumeBtn
   m_TagString: Untagged
@@ -1344,7 +1385,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5963156519016941846}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3362760817483113927}
+        m_TargetAssemblyTypeName: PausePopup, Assembly-CSharp
+        m_MethodName: OnResumeButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4075312260079105156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5658599472658769939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c84692c19c81a54898a355487dd89fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundKey: CLICK
 --- !u!1 &7745239674411208875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1423,7 @@ GameObject:
   - component: {fileID: 5212176180876195722}
   - component: {fileID: 8203516386226835601}
   - component: {fileID: 7644140356941695247}
+  - component: {fileID: 2261206681069885186}
   m_Layer: 5
   m_Name: HomeBtn
   m_TagString: Untagged
@@ -1465,7 +1532,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8203516386226835601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3362760817483113927}
+        m_TargetAssemblyTypeName: PausePopup, Assembly-CSharp
+        m_MethodName: OnHomeButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2261206681069885186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745239674411208875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c84692c19c81a54898a355487dd89fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundKey: CLICK
 --- !u!1 &7764560115208424460
 GameObject:
   m_ObjectHideFlags: 0

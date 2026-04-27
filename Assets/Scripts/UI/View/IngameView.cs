@@ -12,11 +12,11 @@ public class IngameView : BaseView
 
     public void OnHomeButtonClicked()
     {
-        ViewController.Ins.ShowView(ViewType.Home, false);
+        ViewController.Instance.ShowView(ViewType.Home, false);
     }
 
     public void OnPauseButtonClicked()
     {
-        PopupController.Ins.Show(PopupType.Pause);
+        PopupController.Instance.Show(PopupType.Pause);
     }
 }

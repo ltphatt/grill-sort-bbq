@@ -29,19 +29,8 @@ public class GameController : MonoBehaviour
         currentLevel++;
     }
 
-    public void PauseLevel()
-    {
-        Time.timeScale = 0f;
-    }
-
-    public void ResumeLevel()
-    {
-        Time.timeScale = 1f;
-    }
-
     public void RestartLevel()
     {
-        Time.timeScale = 1f;
         GameManager.Instance.InitLevel(levels.GetLevelData(currentLevel));
     }
 

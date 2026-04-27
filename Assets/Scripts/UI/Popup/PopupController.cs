@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PopupController : MonoBehaviour
 {
-    public static PopupController Ins { get; private set; }
+    public static PopupController Instance { get; private set; }
 
     [SerializeField] private BasePopup[] popups;
     Dictionary<PopupType, BasePopup> popupDict = new();
 
     void Awake()
     {
-        if (Ins != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        Ins = this;
+        Instance = this;
 
         popupDict = new();
         foreach (var popup in popups)

@@ -13,4 +13,22 @@ public class PausePopup : BasePopup
     {
         Time.timeScale = 1f;
     }
+
+    public void OnResumeButtonClicked()
+    {
+        Hide();
+    }
+
+    public void OnRestartButtonClicked()
+    {
+        Hide();
+        ViewController.Instance.ShowView(ViewType.Ingame, false);
+        GameController.Instance.RestartLevel();
+    }
+
+    public void OnHomeButtonClicked()
+    {
+        Hide();
+        ViewController.Instance.ShowView(ViewType.Home, false);
+    }
 }
