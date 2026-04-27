@@ -9,4 +9,9 @@ public class HomeView : BaseView
         ViewController.Ins.ShowView(ViewType.Ingame);
         LevelManager.Instance.ToNextLevel();
     }
+
+    public void OnHomeSettingsButtonClicked()
+    {
+        PopupController.Ins.Show(PopupType.HomeSettings);
+    }
 }
