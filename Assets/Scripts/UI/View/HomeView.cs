@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class HomeView : BaseView
 {
+    public override void Show()
+    {
+        base.Show();
+        Time.timeScale = 1f;
+    }
+
     public void StartGame()
     {
         ViewController.Ins.ShowView(ViewType.Ingame);
-        LevelManager.Instance.ToNextLevel();
+        GameController.Instance.ToNextLevel();
     }
 
     public void OnHomeSettingsButtonClicked()

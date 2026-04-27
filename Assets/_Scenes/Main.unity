@@ -453,7 +453,6 @@ GameObject:
   - component: {fileID: 640141921}
   - component: {fileID: 640141922}
   - component: {fileID: 640141923}
-  - component: {fileID: 640141924}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -513,31 +512,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 640141919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c44c046aad7c3c74cbaf0d026b64aa9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ad061f2bc4b8b7499f395355601aabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 1
-  allFood: 15
-  totalFood: 12
-  totalGrill: 9
-  LevelDuration: 180
---- !u!114 &640141924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640141919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de9c19a881e4c948b58e9d6ede480e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelTxt: {fileID: 291133827}
-  timerTxt: {fileID: 324321088}
-  timerFill: {fileID: 572341386}
-  pausePopup: {fileID: 614678321}
-  resultCanvas: {fileID: 1751160229}
+  levels: {fileID: 11400000, guid: 02cbfdf080ef1f140a61ca5fedd9e783, type: 2}
 --- !u!1001 &693936937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -806,6 +785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1095464298}
+  - component: {fileID: 1095464301}
   - component: {fileID: 1095464299}
   - component: {fileID: 1095464300}
   m_Layer: 0
@@ -861,6 +841,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popups:
   - {fileID: 2107753890}
+--- !u!114 &1095464301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095464297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de9c19a881e4c948b58e9d6ede480e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelTxt: {fileID: 291133827}
+  timerTxt: {fileID: 324321088}
+  timerFill: {fileID: 572341386}
+  pausePopup: {fileID: 614678321}
+  resultCanvas: {fileID: 1751160229}
 --- !u!1 &1166118590
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,10 +887,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1359364215}
   - {fileID: 640141920}
-  - {fileID: 805109868}
   - {fileID: 1095464298}
+  - {fileID: 1359364215}
+  - {fileID: 805109868}
   - {fileID: 1252000217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -953,7 +950,7 @@ GameObject:
   - component: {fileID: 1359364216}
   - component: {fileID: 1359364217}
   m_Layer: 0
-  m_Name: GameBooster
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1404,11 +1401,11 @@ PrefabInstance:
     - target: {fileID: 2979212013757804241, guid: f2d9f1a059a7ec4438474924aa0577ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 3666559315385141486, guid: f2d9f1a059a7ec4438474924aa0577ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 5090688921666218244, guid: f2d9f1a059a7ec4438474924aa0577ba, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1625,7 +1622,7 @@ PrefabInstance:
     - target: {fileID: 1686945722453935160, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 1987852237994512384, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_Name
       value: UIView_Ingame
@@ -1665,7 +1662,7 @@ PrefabInstance:
     - target: {fileID: 5934112140154566607, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 5983157798506414401, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_CellSize.y
       value: 310
@@ -1709,7 +1706,7 @@ PrefabInstance:
     - target: {fileID: 7207611841732890002, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 7301867399169215948, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1717,11 +1714,11 @@ PrefabInstance:
     - target: {fileID: 7439632737267446100, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 7760102035719147295, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640141923}
+      objectReference: {fileID: 0}
     - target: {fileID: 8268499596765703040, guid: 0c60d03f92263ac4aadf147a98825304, type: 3}
       propertyPath: m_IsActive
       value: 0

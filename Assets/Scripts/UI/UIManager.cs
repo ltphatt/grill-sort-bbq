@@ -35,8 +35,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        totalTime = LevelManager.Instance.LevelDuration;
-        timeRemaining = LevelManager.Instance.LevelDuration;
+        totalTime = GameController.Instance.GetLevelTime();
+        timeRemaining = GameController.Instance.GetLevelTime();
         StartCoroutine(StartCountdown());
     }
 
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     public void UpdateLevel(object[] data)
     {
         int level = (int)data[0];
-        timeRemaining = LevelManager.Instance.LevelDuration;
+        timeRemaining = GameController.Instance.GetLevelTime();
         levelTxt.text = $"Lv.{level}";
     }
 

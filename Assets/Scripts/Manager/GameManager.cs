@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviour
         Observer.Unsubscribe(EventMessage.ON_USE_BOOSTER_SHUFFLE, OnShuffle);
     }
 
-    public void InitLevel(int level, int allFood, int totalFood, int totalGrill)
+    public void InitLevel(LevelData levelData)
     {
-        this.allFood = allFood;
+        allFood = levelData.allFood;
 
-        List<Sprite> takeFood = totalSpritesFood.OrderBy(x => Random.value).Take(totalFood).ToList();
+        List<Sprite> takeFood = totalSpritesFood.OrderBy(x => Random.value).Take(levelData.totalFood).ToList();
         List<Sprite> useFood = new();
 
         for (int i = 0; i < allFood; i++)
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
 
         // Calculate the total number of trays needed based on the average number of food items per tray
         int totalTray = Mathf.RoundToInt(useFood.Count / avgTray);
-        List<int> foodPerGrill = DistributeEvenly(totalGrill, useFood.Count);
+        List<int> foodPerGrill = DistributeEvenly(levelData.totalGrill, useFood.Count);
         List<int> trayPerGrill = new();
-        for (int i = 0; i < totalGrill; i++)
+        for (int i = 0; i < levelData.totalGrill; i++)
         {
             int neededTrays = Mathf.CeilToInt(foodPerGrill[i] / avgTray);
             neededTrays = Mathf.Max(1, neededTrays);
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
         ClearGrill();
 
-        for (int i = 0; i < totalGrill; i++)
+        for (int i = 0; i < levelData.totalGrill; i++)
         {
             GameObject grillObject = Instantiate(grillTemplate, gridGrill);
             grillObject.name = $"Grill_{i}";
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             grillStations.Add(grill);
         }
 
-        Observer.Notify(EventMessage.ON_UPDATE_LEVEL, level);
+        Observer.Notify(EventMessage.ON_UPDATE_LEVEL, levelData.levelIndex);
     }
 
     List<int> DistributeEvenly(int grillCount, int totalTrays)

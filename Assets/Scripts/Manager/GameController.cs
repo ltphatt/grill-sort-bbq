@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class GameController : MonoBehaviour
 {
-    public static LevelManager Instance { get; private set; }
+    public static GameController Instance { get; private set; }
+
     public int currentLevel = 1;
-    [SerializeField] int allFood;
-    [SerializeField] int totalFood;
-    [SerializeField] int totalGrill;
-    public int LevelDuration = 120;
+    public LevelChain levels;
 
     void Awake()
     {
@@ -44,11 +42,16 @@ public class LevelManager : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
+        GameManager.Instance.InitLevel(levels.GetLevelData(currentLevel));
     }
 
     public void ToNextLevel()
     {
-        GameManager.Instance.InitLevel(currentLevel, allFood, totalFood, totalGrill);
+        GameManager.Instance.InitLevel(levels.GetLevelData(currentLevel));
+    }
+
+    public int GetLevelTime()
+    {
+        return levels.GetLevelData(currentLevel).levelTime;
     }
 }
