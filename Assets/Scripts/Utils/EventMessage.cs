@@ -1,0 +1,12 @@
+
+public enum EventMessage
+{
+    NONE = 0,
+    ON_UPDATE_LEVEL,
+    ON_START_LEVEL,
+    ON_COMPLETE_LEVEL,
+    ON_MERGE_FOOD,
+    ON_USE_BOOSTER_MAGNET,
+    ON_USE_BOOSTER_SHUFFLE,
+    ON_USE_BOOSTER_TIME,
+}
